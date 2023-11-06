@@ -1,3 +1,5 @@
+
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -25,7 +27,6 @@ class Player:
         else:
             return False
 
-
 class Objects:
     def __init__(self, place, item):
         self.__place = place
@@ -44,9 +45,13 @@ class Objects:
         pass
 
 
+def numsfunc():
+    import nums
+
 
 player = Player()
 alley = Objects("Alley", "fish")
+pantry = Objects("pantry", "sushi")
 
 def route1():
     # create items for alleyway
@@ -91,8 +96,15 @@ def route2():
             while True:
                 bc2 = input(bcolors.HEADER + "Type 'jump' or 'turn around'\n" + bcolors.ENDC)
                 if bc2 == "jump":
-                    
-                    pass
+                    print("\nYou smell leftover sushi behind a locked door.")
+                    print("Can you guess the correct combination?")
+
+                    numsfunc()
+                    pantry.take_item()
+                    player.check_inventory()
+
+                    break
+
                 elif bc2 == "turn around":
                     route2()
                     break
