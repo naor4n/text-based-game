@@ -44,6 +44,9 @@ class Objects:
         Player.__inventory.remove(self.__item)
         pass
 
+    def check_items(self):
+        return len(self.__place_inventory)
+
 
 def numsfunc():
     import nums
@@ -62,19 +65,21 @@ def route1():
         ac1 = input(bcolors.HEADER + "Type 'peek' or 'turn back'\n" + bcolors.ENDC)
         if ac1 == "peek":
             print("\nYou see a bunch of fish inside. Take one?")
-            while True:
+            while alley.check_items() != 0:
                 ac2 = input("Type y/n\n")
                 if ac2 == "y":
                     alley.take_item()
                     player.check_inventory()
-                    print("\nYou take the fish and go back to the beginning")
+                    print("\nYou take the fish and go back to the beginning-")
                     quest1()
                     break
                 elif ac2 == "n":
-                    print("\nYou turn around and go back to the beginning")
+                    print("\nYou turn around and go back to the beginning-")
                     quest1()
                     break
-
+            if alley.check_items() == 0:
+                print("\nYou can't reach far enough to take another fish so you turn back.")
+                quest1()
             break
         elif ac1 == "turn back":
             quest1()
