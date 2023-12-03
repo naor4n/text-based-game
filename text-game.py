@@ -1,3 +1,7 @@
+"""
+
+
+"""
 
 
 class bcolors:
@@ -26,6 +30,9 @@ class Player:
             return True
         else:
             return False
+        
+    def condition(self):
+        self.__condition = False
 
 class Objects:
     def __init__(self, place, item):
@@ -48,13 +55,16 @@ class Objects:
         return len(self.__place_inventory)
 
 
-def numsfunc():
-    import nums
-
 
 player = Player()
 alley = Objects("Alley", "fish")
-pantry = Objects("pantry", "sushi")
+
+
+def secret_route():
+    print("does it work?")
+    
+
+
 
 def route1():
     # create items for alleyway
@@ -64,29 +74,29 @@ def route1():
     while True:
         ac1 = input(bcolors.HEADER + "Type 'peek' or 'turn back'\n" + bcolors.ENDC)
         if ac1 == "peek":
-            print("\nYou see a bunch of fish inside. Take one?")
             while alley.check_items() != 0:
-                ac2 = input("Type y/n\n")
+                print("\nYou see a bunch of fish inside. Take one?")
+                ac2 = input(bcolors.HEADER +"Type y/n\n"+ bcolors.ENDC)
                 if ac2 == "y":
                     alley.take_item()
                     player.check_inventory()
-                    print("\nYou take the fish and go back to the beginning-")
+                    print("\nYou take the fish and go back to the beginning.")
                     quest1()
                     break
                 elif ac2 == "n":
-                    print("\nYou turn around and go back to the beginning-")
+                    print("\nYou turn around and go back to the beginning.")
                     quest1()
                     break
             if alley.check_items() == 0:
-                print("\nYou can't reach far enough to take another fish so you turn back.")
+                print(bcolors.WARNING + "\nYou can't reach far enough to take another fish so you turn back." + bcolors.ENDC)
                 quest1()
-            break
+                break
         elif ac1 == "turn back":
             quest1()
             break
         else: 
             print(bcolors.FAIL + "Please choose one of the routes." + bcolors.ENDC)
-
+        break
 
 def route2():
     print("\nSqueezing through the fence, you're now at the far corner of a backyard with an overgrown lawn.")
@@ -97,24 +107,37 @@ def route2():
         bc1 = input(bcolors.HEADER + "Type 'right' or 'straight'\n" + bcolors.ENDC)
         if bc1 == "right":
             print("\nYou're now next to a house. Through an open window you hear people talking.")
-            print("Will you jump inside, or turn around?")
-            while True:
-                bc2 = input(bcolors.HEADER + "Type 'jump' or 'turn around'\n" + bcolors.ENDC)
-                if bc2 == "jump":
-                    print("\nYou smell leftover sushi behind a locked door.")
-                    print("Can you guess the correct combination?")
+            if not player.condition:
+                print("Will you jump inside, or turn around?")
+                while True:
+                    bc2 = input(bcolors.HEADER + "Type 'jump' or 'turn around'\n" + bcolors.ENDC)
+                    if bc2 == "jump":
+                        print(bcolors.WARNING + "\nLooking in from the windowsill, there are three doors inside. You don't which one to choose. You turn back." + bcolors.ENDC)
+                        route2()
+                        break
 
-                    numsfunc()
-                    pantry.take_item()
-                    player.check_inventory()
-
-                    break
-
-                elif bc2 == "turn around":
-                    route2()
-                    break
-                else:
-                    print(bcolors.FAIL + "Please choose one of the options." + bcolors.ENDC)
+                    elif bc2 == "turn around":
+                        route2()
+                        break
+                    else:
+                        print(bcolors.FAIL + "Please choose one of the options." + bcolors.ENDC)
+            else:
+                print("Will you jump inside, or turn around?")
+                while True:
+                    bc4 = input(bcolors.HEADER + "Type 'jump' or 'turn around'\n" + bcolors.ENDC)
+                    if bc4 == "jump":
+                        print("Which door was the right one?")
+                        door = input(bcolors.HEADER + "type 'left', 'middle' or 'right' \n" + bcolors.ENDC)
+                        if door == "middle":
+                            secret_route()
+                        else:
+                            print("wrong door, you were caught by the humans")
+                            exit()
+                    elif bc2 == "turn around":
+                        route2()
+                        break
+                    else:
+                        print(bcolors.FAIL + "Please choose one of the options." + bcolors.ENDC)
             break
 
         elif bc1 == "straight":
@@ -124,11 +147,15 @@ def route2():
                 if bc3 == "offer food":
                     if player.is_item("fish"):
                         print("\nyou offer the fish from earlier")
-                        
+                        player.condition = True
+                        print(player.condition)
+                        print("The kitten gives you instructions to a place called ", bcolors.OKCYAN +"The Cat Kingdom" + bcolors.ENDC)
+                        print("Head right from the previous crossing, go through the window and choose the middle door ")
+                        route2()
                         break
                     else:
                         print(bcolors.WARNING + "\nyou have no food to offer and go back to the beginning." + bcolors.ENDC)
-                        route2()
+                        quest1()
                         break
                 else:
                      print(bcolors.FAIL + "Try again" + bcolors.ENDC)
@@ -156,6 +183,7 @@ def quest1():
 
 
 def main():
+    player.condition = False
     print(bcolors.HEADER + "welcome, traveler! Would you like to embark on a journey?" + bcolors.ENDC)
     while True:
         embark = input("y/n\n")
@@ -171,3 +199,5 @@ def main():
         
 
 main()
+
+
