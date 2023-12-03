@@ -1,19 +1,12 @@
-"""
-
-
-"""
-
 
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 class Player:
     def __init__(self):
@@ -55,16 +48,16 @@ class Objects:
         return len(self.__place_inventory)
 
 
-
 player = Player()
 alley = Objects("Alley", "fish")
 
 
-def secret_route():
-    print("does it work?")
+def final_route():
+    print("You go through the middle door, avoiding the humans you still hear. ")
+    print("Behind the door is a brown spotted cat. You follow it to a cat flap, and go through.")
     
 
-
+    
 
 def route1():
     # create items for alleyway
@@ -82,21 +75,21 @@ def route1():
                     player.check_inventory()
                     print("\nYou take the fish and go back to the beginning.")
                     quest1()
-                    break
+                    
                 elif ac2 == "n":
                     print("\nYou turn around and go back to the beginning.")
                     quest1()
-                    break
+                    
             if alley.check_items() == 0:
                 print(bcolors.WARNING + "\nYou can't reach far enough to take another fish so you turn back." + bcolors.ENDC)
                 quest1()
-                break
+                
         elif ac1 == "turn back":
             quest1()
-            break
+            
         else: 
             print(bcolors.FAIL + "Please choose one of the routes." + bcolors.ENDC)
-        break
+        
 
 def route2():
     print("\nSqueezing through the fence, you're now at the far corner of a backyard with an overgrown lawn.")
@@ -114,11 +107,11 @@ def route2():
                     if bc2 == "jump":
                         print(bcolors.WARNING + "\nLooking in from the windowsill, there are three doors inside. You don't which one to choose. You turn back." + bcolors.ENDC)
                         route2()
-                        break
+                        
 
                     elif bc2 == "turn around":
                         route2()
-                        break
+                        
                     else:
                         print(bcolors.FAIL + "Please choose one of the options." + bcolors.ENDC)
             else:
@@ -126,19 +119,19 @@ def route2():
                 while True:
                     bc4 = input(bcolors.HEADER + "Type 'jump' or 'turn around'\n" + bcolors.ENDC)
                     if bc4 == "jump":
-                        print("Which door was the right one?")
+                        print("\nWhich door was the right one?")
                         door = input(bcolors.HEADER + "type 'left', 'middle' or 'right' \n" + bcolors.ENDC)
                         if door == "middle":
-                            secret_route()
+                            final_route()
                         else:
                             print("wrong door, you were caught by the humans")
                             exit()
                     elif bc2 == "turn around":
                         route2()
-                        break
+                        
                     else:
                         print(bcolors.FAIL + "Please choose one of the options." + bcolors.ENDC)
-            break
+            
 
         elif bc1 == "straight":
             print("\nYou see a scared kitten. Maybe if you offer it food, it will tell you where to go?")
@@ -150,17 +143,15 @@ def route2():
                         player.condition = True
                         print(player.condition)
                         print("The kitten gives you instructions to a place called ", bcolors.OKCYAN +"The Cat Kingdom" + bcolors.ENDC)
-                        print("Head right from the previous crossing, go through the window and choose the middle door ")
+                        print("Head right from the previous crossing, go through the window and choose the middle door.")
                         route2()
-                        break
+                        
                     else:
                         print(bcolors.WARNING + "\nyou have no food to offer and go back to the beginning." + bcolors.ENDC)
                         quest1()
-                        break
+                        
                 else:
                      print(bcolors.FAIL + "Try again" + bcolors.ENDC)
-
-            break
         else: 
             print(bcolors.FAIL + "Please choose one of the routes." + bcolors.ENDC)
 
@@ -179,7 +170,6 @@ def quest1():
             break
         else:
             print(bcolors.FAIL + "Please choose one of the routes." + bcolors.ENDC)
-
 
 
 def main():
