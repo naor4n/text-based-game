@@ -55,12 +55,9 @@ alley = Objects("Alley", "fish")
 def final_route():
     print("You go through the middle door, avoiding the humans you still hear. ")
     print("Behind the door is a brown spotted cat. You follow it to a cat flap, and go through.")
-    
 
-    
 
 def route1():
-    # create items for alleyway
     print("\nYou quickly navigate through the alleyway's sharp corners and arrive at a dead end.")
     print("You see a dumpster next to a suspicious door. This is the origin of the fishy smell.")
     print("You could probably manage to get in and out of the dumpster without getting stuck. Will you peek in?")
@@ -185,7 +182,7 @@ def main():
             print(bcolors.BOLD + "Until next time..." + bcolors.ENDC)
             break
         else:
-            print(bcolors.FAIL + "WHAT YA SAY??" + bcolors.ENDC)
+            print(bcolors.FAIL + "Come again?" + bcolors.ENDC)
         
 
 main()
