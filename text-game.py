@@ -51,19 +51,17 @@ player = Player()
 alley = Objects("Alley", ["fish"])
 kitten = Objects("Kitten", ["seashell", "banana", "spoon"])
 cat_kingdom = Objects("cat_kingdom", [])
+door_gen = random.choice(["left", "right", "middle"])
 
 
 def final_route():
-    print("\nYou go through the middle door, avoiding the humans you still hear. ")
+    print("\nYou go through the middle door, avoiding the humans you can still hear. ")
     print("Behind the door is a brown spotted cat. You follow it to a cat flap, and go through.")
-
-    
+    print("You arrive at a cat-sized gate. To pass through, you sacrifice the {} you got from the kitten.".format(player.inventory[0]))
 
 
     print(bcolors.WARNING + "You've complited your first quest!!" + bcolors.ENDC)
     exit()
-
-
 
 
 def route1():
@@ -127,7 +125,7 @@ def route2():
                     if b_choice_4 == "jump":
                         print("\nWhich door was the right one?")
                         door = input(bcolors.HEADER + "type 'left', 'middle' or 'right' \n" + bcolors.ENDC)
-                        if door == "middle":
+                        if door == door_gen:
                             final_route()
                         else:
                             print("\nwrong door, you were caught by the humans")
@@ -153,7 +151,7 @@ def route2():
                         player.condition = True
 
                         print("The kitten gives you instructions to a place called ", bcolors.OKCYAN +"The Cat Kingdom" + bcolors.ENDC)
-                        print("Head right from the previous crossing, go through the window and choose the middle door.")
+                        print("Head right from the previous crossing, go through the window and choose the {} door.".format(door_gen))
                         print("You are also given an item to pass through the gates once you arrive.")
                         kitten.take_item_rnd()
 
