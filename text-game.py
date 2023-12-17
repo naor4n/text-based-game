@@ -84,7 +84,7 @@ def route1():
                     quest1()
                     
             if alley.check_items() == 0:
-                print(bcolors.WARNING + "\nYou can't reach far enough to take another fish so you turn back." + bcolors.ENDC)
+                print(bcolors.WARNING + "\nyou can't reach far enough to take another fish so you turn back." + bcolors.ENDC)
                 quest1()
                 
         elif a_choice_1 == "turn back":
@@ -109,7 +109,7 @@ def route2():
                 while True:
                     b_choice_2 = input(bcolors.HEADER + "Type 'jump' or 'turn around'\n" + bcolors.ENDC)
                     if b_choice_2 == "jump":
-                        print(bcolors.WARNING + "\nLooking in from the windowsill, there are three doors inside. You don't which one to choose. You turn back." + bcolors.ENDC)
+                        print(bcolors.WARNING + "\nLooking in from the windowsill, there are three doors inside. You don't know which one to choose. You turn back." + bcolors.ENDC)
                         route2()
                         
                     elif b_choice_2 == "turn around":
@@ -145,12 +145,12 @@ def route2():
                 b_choice_3 = input(bcolors.HEADER + "Type 'offer food'\n" + bcolors.ENDC)
                 if b_choice_3 == "offer food":
                     if player.is_item("fish"):
-                        print("\nyou offer the fish from earlier")
+                        print(bcolors.WARNING +  "\nyou offer the fish from earlier"+ bcolors.ENDC )
 
                         player.inventory.remove("fish")
                         player.condition = True
 
-                        print("The kitten gives you instructions to a place called ", bcolors.OKCYAN +"The Cat Kingdom" + bcolors.ENDC)
+                        print("\nThe kitten gives you instructions to a place called ", bcolors.OKCYAN +"The Cat Kingdom" + bcolors.ENDC)
                         print("Head right from the previous crossing, go through the window and choose the {} door.".format(door_gen))
                         print("You are also given an item to pass through the gates once you arrive.")
                         kitten.take_item_rnd()
