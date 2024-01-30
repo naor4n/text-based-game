@@ -1,7 +1,7 @@
 ### ohjelmoinnin perusteet harjoitustyö 2023
-#### purpose
+#### Purpose
 Final project for Basics of Programming -course.
 
-#### description
+#### Description
 A small text-based game with python. 
 
